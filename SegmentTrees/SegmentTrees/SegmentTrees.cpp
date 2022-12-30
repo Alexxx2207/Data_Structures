@@ -99,30 +99,6 @@ int querySum(int l, int r)
 	return query(l, r, 0, arr_size, 1);
 }
 
-int findMaxSubarraySum(int i, int lc, int rc)
-{
-	if (i == 1)
-	{
-		int mid = (lc + rc) / 2;
-		return max(findMaxSubarraySum(i * 2, lc, mid), findMaxSubarraySum(i * 2 + 1, mid + 1, rc));
-	}
-	if (i >= arr_size)
-	{
-		return sumTree[i];
-	}
-	
-	int mid = (lc + rc) / 2;
-
-	return max(
-		sumTree[i], 
-		max(findMaxSubarraySum(i*2, lc, mid), findMaxSubarraySum(i*2+1, mid+1, rc)));
-}
-
-int queryMaxSubarraySum()
-{
-	return findMaxSubarraySum(1, 0, arr_size);
-}
-
 int main()
 {
 	vector<int> t = { 5, -2, 4,3,2 };
@@ -131,8 +107,6 @@ int main()
 	buildTree(t);
 	printTree();
 	cout << "Query sum: " <<querySum(1, 3) << endl;
-	cout << "Max Subarray Sum: " << queryMaxSubarraySum() << endl;
 	update(1, 10);
 	printTree();
-	cout << "Max Subarray Sum: " << queryMaxSubarraySum() << endl;
 }
